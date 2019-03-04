@@ -113,17 +113,15 @@ while (($#>0)); do
             shift;;
         -h|--help)
             usage
-            exit 0
             ;;
         *)
-            # default
-            LED_LIGHT=${1}
+            DEFAULT_LED_LIGHT=${1}
             shift;;
     esac
 done
 
-if [ ! -z "${BLINK}" ] ; then
-    led_blink ${LED_LIGHT} ${BLINK}
+if [ ! -z "${BLINK}" ] || [ ! -z "${DEFAULT_LED_LIGHT}" ]; then
+    led_blink ${DEFAULT_LED_LIGHT:-${LED_LIGHT}} ${BLINK}
 fi
 
 if [ ! -z "${ON}" ]; then
